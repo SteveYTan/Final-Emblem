@@ -7,5 +7,5 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, './static')));
 
 app.listen(8000, function(){
-	console.log('listening on port 8000');
+	console.log('listening on port 5000');
 })

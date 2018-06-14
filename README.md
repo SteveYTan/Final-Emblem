@@ -1,4 +1,4 @@
-# Final-Emblem
+# Poke-Emblem
 Mash up game of fire emblem and pokemon! If you have node just type node server.js to run. Built almost entirely using angular!
 
 To play

@@ -25,7 +25,6 @@ angApp.controller('mainController', function($scope, gameFactory, $location){
     	pokearray.push($scope.newTeam.b);
     	pokearray.push($scope.newTeam.c);
 
-    	console.log("hello!!!");
 
     	gameFactory.maketeam(pokearray, function(){
 

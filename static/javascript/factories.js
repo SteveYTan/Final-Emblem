@@ -34,29 +34,41 @@ angApp.factory('gameFactory', function($http){
 		var count = 0;
 		for (var i = 0; i < numberArray.length; i++)
 		{
-			$http.get('http://pokeapi.co/api/v1/pokemon/' + numberArray[i]).success(function(output){
+			//$http.get('http://pokeapi.co/api/v2/pokemon/' + numberArray[i]).success(function(output){
+			// old HTTP Request
+
+			$http.get('http://pokeapi.salestock.net/api/v2/pokemon/' + numberArray[i]).success(function(output){
 				
 				var pokemon = {
+
+					//output.stats[0] = Speed
+					//output.stats[1] = SP Def
+					//output.stats[2] = SP Atk
+
 					name: output.name,
-					img :  "<img src='http://pokeapi.co/media/img/"+ output.national_id + ".png'>",
-					hp : Math.ceil(1.5 * (output.hp + 100)),
-					attack: Math.ceil((output.attack+ output.sp_atk)/2),
+					img :  "<img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+ output.id + ".png'>",
+					hp : Math.ceil(1.5 * (output.stats[5].base_stat + 100)),
+					attack: Math.ceil((output.stats[4].base_stat+ output.stats[2].base_stat)/2),
+
+
 					status : 'ntrdy',
-					timer : 6 + Math.ceil(400/(output.speed + 40)),
+					//timer : 6 + Math.ceil(400/(output.speed + 40)),
+					timer : 6 + Math.ceil(400/(output.stats[0].base_stat+ 40)),
 					cooldown : 0,
-					maxmoves : 2 + Math.ceil(output.speed/20),
-					moves: 2 + Math.ceil(output.speed/20),
-					type1: output.types[0].name,
+					maxmoves : 2 + Math.ceil(output.stats[0].base_stat/20),
+					moves: 2 + Math.ceil(output.stats[0].base_stat/20),
+					type1: output.types[0].type.name,
 					player: "player1"
 
 					
 				};
-				//console.log(output.types.0.name);
+				console.log(output.types);
+
 				if(output.types[1])
 				{
-					pokemon.type2 = output.types[1].name;
+					pokemon.type2 = output.types[1].type.name;
 				}
-				//console.log(pokemon);
+				console.log(pokemon);
 				data.push(pokemon);
 				count++
 				{
